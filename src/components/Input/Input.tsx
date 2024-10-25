@@ -18,6 +18,7 @@ export default function Input({
   return (
     <input
       name={name}
+      aria-label={name}
       value={value}
       onChange={(e) => onChange(e.currentTarget.name, e.currentTarget.value)}
       type={type || "text"}

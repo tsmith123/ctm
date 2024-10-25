@@ -19,6 +19,7 @@ export default function Select({
   return (
     <select
       name={name}
+      aria-label={name}
       value={value}
       onChange={(e) => onChange(e.currentTarget.name, e.currentTarget.value)}
       className="select"

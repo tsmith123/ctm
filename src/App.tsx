@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Input from "./components/Input";
 import Select from "./components/Select";
-import data from "./data/api.json";
 import { Field, Question } from "./types";
+
+const data = require("./data/api.json");
 
 type Values = {
   name: string;
@@ -20,7 +21,6 @@ function App() {
   const [values, setValues] = useState<Values>(initialValues);
 
   const handleOnChange = (name: string, value: string) => {
-    // console.log(name, value);
     const valuesCopy: any = { ...values };
 
     valuesCopy[name] = value;
@@ -40,7 +40,7 @@ function App() {
               const value = values[field.name as keyof Values];
               const { element, options, name, placeholder, type } = field;
 
-              if (field.element === "input") {
+              if (element === "input") {
                 return (
                   <div key={idx}>
                     <Input
@@ -54,21 +54,17 @@ function App() {
                 );
               }
 
-              if (element === "select") {
-                return (
-                  <div key={idx}>
-                    <Select
-                      name={name}
-                      value={value}
-                      options={options!}
-                      onChange={handleOnChange}
-                      placeholder={placeholder}
-                    />
-                  </div>
-                );
-              }
-
-              return null;
+              return (
+                <div key={idx}>
+                  <Select
+                    name={name}
+                    value={value}
+                    options={options!}
+                    onChange={handleOnChange}
+                    placeholder={placeholder}
+                  />
+                </div>
+              );
             })}
           </div>
         );
