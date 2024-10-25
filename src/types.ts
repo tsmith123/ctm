@@ -6,6 +6,7 @@ export interface Option {
 export interface Field {
   element: string;
   type: string;
+  name: string;
   placeholder?: string;
   options?: Option[];
 }
