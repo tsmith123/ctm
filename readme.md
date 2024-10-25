@@ -1,3 +1,25 @@
+## Running The Project
+
+First install the depencides:
+
+```
+npm install
+```
+
+Then run the tests:
+
+```
+npm test
+```
+
+And finally, run the project (dev mode):
+
+```
+npm run dev
+```
+
+The app is available at http://localhost:5173/
+
 # Tech Test
 
 Consume the JSON file provided at `api.json` and generate a question list UI from the data it describes.
@@ -7,6 +29,7 @@ Visually generate something like the image below, using any technology you want.
 As a plus add some styling, though not strictly necessary.
 
 ## Setup
+
 Use a local web server to point to the files in `/src/`
 
 If you have node installed you should be able to `npm install && npm start` to spin up a local server using the `http-server` module.
