@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Input from "./components/Input";
+import Select from "./components/Select";
 import data from "./data/api.json";
 import { Field, Question } from "./types";
 
@@ -7,14 +8,6 @@ type Values = {
   name: string;
   dob: string;
   vehicle: string;
-};
-
-const buildInput = (element: string, type: string) => {
-  // if (element === "input" && type === "text") {
-  //   return Input;
-  // }
-
-  return Input;
 };
 
 const initialValues: Values = {
@@ -27,7 +20,7 @@ function App() {
   const [values, setValues] = useState<Values>(initialValues);
 
   const handleOnChange = (name: string, value: string) => {
-    console.log(name, value);
+    // console.log(name, value);
     const valuesCopy: any = { ...values };
 
     valuesCopy[name] = value;
@@ -44,20 +37,29 @@ function App() {
           <div key={question.id}>
             <h2>{question.title}</h2>
             {question.fields.map((field: Field, idx: number) => {
-              const Component = buildInput(field.element, field.type);
-
               const value = values[field.name as keyof Values];
-
-              console.log(field);
 
               if (field.element === "input") {
                 return (
                   <div key={idx}>
-                    <Component
+                    <Input
                       type={field.type}
                       name={field.name}
                       value={value}
                       placeholder={field.placeholder}
+                      onChange={handleOnChange}
+                    />
+                  </div>
+                );
+              }
+
+              if (field.element === "select") {
+                return (
+                  <div key={idx}>
+                    <Select
+                      name={field.name}
+                      value={value}
+                      options={field.options!}
                       onChange={handleOnChange}
                     />
                   </div>
