@@ -14,9 +14,9 @@ function App() {
   const [values, setValues] = useState<Values>(initialValues);
 
   const handleOnChange = (name: string, value: string) => {
-    const valuesCopy: any = { ...values };
+    const valuesCopy: Values = { ...values };
 
-    valuesCopy[name] = value;
+    valuesCopy[name as keyof Values] = value;
     setValues(valuesCopy);
   };
 
