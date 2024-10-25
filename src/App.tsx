@@ -38,29 +38,31 @@ function App() {
             <h2>{question.title}</h2>
             {question.fields.map((field: Field, idx: number) => {
               const value = values[field.name as keyof Values];
+              const { element, options, name, placeholder, type } = field;
 
               if (field.element === "input") {
                 return (
                   <div key={idx}>
                     <Input
-                      type={field.type}
-                      name={field.name}
+                      type={type}
+                      name={name}
                       value={value}
-                      placeholder={field.placeholder}
                       onChange={handleOnChange}
+                      placeholder={placeholder}
                     />
                   </div>
                 );
               }
 
-              if (field.element === "select") {
+              if (element === "select") {
                 return (
                   <div key={idx}>
                     <Select
-                      name={field.name}
+                      name={name}
                       value={value}
-                      options={field.options!}
+                      options={options!}
                       onChange={handleOnChange}
+                      placeholder={placeholder}
                     />
                   </div>
                 );

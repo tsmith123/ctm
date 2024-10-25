@@ -6,9 +6,16 @@ type Props = {
   value: string;
   options: Option[];
   onChange(name: string, value: string): void;
+  placeholder?: string;
 };
 
-export default function Select({ name, value, options, onChange }: Props) {
+export default function Select({
+  name,
+  value,
+  options,
+  onChange,
+  placeholder,
+}: Props) {
   return (
     <select
       name={name}
@@ -16,13 +23,16 @@ export default function Select({ name, value, options, onChange }: Props) {
       onChange={(e) => onChange(e.currentTarget.name, e.currentTarget.value)}
       className="select"
     >
-      {options.map((option: Option, idx: number) => {
-        return (
-          <option key={idx} value={option.value}>
-            {option.label}
-          </option>
-        );
-      })}
+      <>
+        {placeholder && <option>{placeholder}</option>}
+        {options.map((option: Option, idx: number) => {
+          return (
+            <option key={idx} value={option.value}>
+              {option.label}
+            </option>
+          );
+        })}
+      </>
     </select>
   );
 }
