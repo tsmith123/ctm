@@ -28,7 +28,7 @@ export default function Select({
         {placeholder && <option>{placeholder}</option>}
         {options.map((option: Option, idx: number) => {
           return (
-            <option key={idx} value={option.value}>
+            <option key={idx} value={option.value} aria-label={`option-${idx}`}>
               {option.label}
             </option>
           );

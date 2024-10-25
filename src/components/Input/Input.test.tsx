@@ -5,15 +5,17 @@ import Input from "./Input";
 
 const onChangeSpy = jest.fn();
 
-describe("When user types into input", () => {
-  it("should call the onChange handler", async () => {
-    render(<Input name="test" value="" onChange={onChangeSpy} />);
+describe("components/Input", () => {
+  describe("When user types into input", () => {
+    it("should call the onChange handler", async () => {
+      render(<Input name="test" value="" onChange={onChangeSpy} />);
 
-    const input = screen.getByLabelText("test");
+      const input = screen.getByLabelText("test");
 
-    const textToType = "x";
+      const textToType = "x";
 
-    await userEvent.type(input, textToType);
-    expect(onChangeSpy).toHaveBeenCalledWith("test", textToType);
+      await userEvent.type(input, textToType);
+      expect(onChangeSpy).toHaveBeenCalledWith("test", textToType);
+    });
   });
 });

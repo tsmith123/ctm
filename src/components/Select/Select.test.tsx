@@ -11,20 +11,38 @@ const mockOptions = [
   { label: "label3", value: "value3" },
 ];
 
-describe("When user chooses an option", () => {
-  it("should call the onChange handler", async () => {
-    render(
-      <Select
-        name="test"
-        value="value1"
-        options={mockOptions}
-        onChange={onChangeSpy}
-      />
-    );
+describe("components/Select", () => {
+  describe("When the component loads", () => {
+    it("should render all options", () => {
+      render(
+        <Select
+          name="test"
+          value="value1"
+          options={mockOptions}
+          onChange={onChangeSpy}
+        />
+      );
 
-    const select = screen.getByLabelText("test");
+      const options = screen.getAllByLabelText(/option-/, { exact: false });
+      expect(options.length).toBe(mockOptions.length);
+    });
+  });
 
-    await userEvent.selectOptions(select, "value2");
-    expect(onChangeSpy).toHaveBeenCalledWith("test", "value2");
+  describe("When user chooses an option", () => {
+    it("should call the onChange handler", async () => {
+      render(
+        <Select
+          name="test"
+          value="value1"
+          options={mockOptions}
+          onChange={onChangeSpy}
+        />
+      );
+
+      const select = screen.getByLabelText("test");
+
+      await userEvent.selectOptions(select, "value2");
+      expect(onChangeSpy).toHaveBeenCalledWith("test", "value2");
+    });
   });
 });
