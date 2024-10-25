@@ -1,15 +1,8 @@
 import { useState } from "react";
 import Input from "./components/Input";
 import Select from "./components/Select";
-import { Field, Question } from "./types";
-
-const data = require("./data/api.json");
-
-type Values = {
-  name: string;
-  dob: string;
-  vehicle: string;
-};
+import * as data from "./data/api.json";
+import { Field, Question, Values } from "./types";
 
 const initialValues: Values = {
   name: "",
@@ -35,35 +28,33 @@ function App() {
       {questions.map((question: Question) => {
         return (
           <div key={question.id}>
-            <h2>{question.title}</h2>
+            <h2 className="app-label">{question.title}</h2>
             {question.fields.map((field: Field, idx: number) => {
               const value = values[field.name as keyof Values];
               const { element, options, name, placeholder, type } = field;
 
               if (element === "input") {
                 return (
-                  <div key={idx}>
-                    <Input
-                      type={type}
-                      name={name}
-                      value={value}
-                      onChange={handleOnChange}
-                      placeholder={placeholder}
-                    />
-                  </div>
+                  <Input
+                    key={`${question.id}-idx`}
+                    type={type}
+                    name={name}
+                    value={value}
+                    onChange={handleOnChange}
+                    placeholder={placeholder}
+                  />
                 );
               }
 
               return (
-                <div key={idx}>
-                  <Select
-                    name={name}
-                    value={value}
-                    options={options!}
-                    onChange={handleOnChange}
-                    placeholder={placeholder}
-                  />
-                </div>
+                <Select
+                  key={idx}
+                  name={name}
+                  value={value}
+                  options={options!}
+                  onChange={handleOnChange}
+                  placeholder={placeholder}
+                />
               );
             })}
           </div>

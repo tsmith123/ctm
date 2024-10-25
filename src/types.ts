@@ -16,3 +16,9 @@ export interface Question {
   title: string;
   fields: Field[];
 }
+
+export interface Values {
+  name: string;
+  dob: string;
+  vehicle: string;
+}
